@@ -11,12 +11,13 @@ set -euo pipefail
 echo --- CLEARING ---
 rm -rf dist
 
-echo --- Set up Github Pages SPA links ---
-# always start with clean config
-git checkout vite.config.mts public/404.html
-# $1 is github repo; $2 is base URL folder (without slashes)
-sed -I .bak "s#'/'#'/$2/'#"  vite.config.mts
-sed -I .bak "s#'/'#'/$2/'#"  public/404.html
+#---SANDAG: not necessary since we are building at root dir of sandag.simwrapper.app/
+#echo --- Set up Github Pages SPA links ---
+## always start with clean config
+#git checkout vite.config.mts public/404.html
+## $1 is github repo; $2 is base URL folder (without slashes)
+#sed -I .bak "s#'/'#'/$2/'#"  vite.config.mts
+#sed -I .bak "s#'/'#'/$2/'#"  public/404.html
 
 echo --- GET LATEST COMMIT ID ---
 SIMWRAPPER_COMMIT=`git rev-parse --short HEAD`
