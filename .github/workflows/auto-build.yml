@@ -1,0 +1,48 @@
+name: Autobuild all pushes to master branch
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  autobuild:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Full git history for proper branch creation
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org/
+
+      - name: Build everything
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TARGET_BRANCH="build"
+          # --- Set git parameters and use write token
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git config --global user.name "Autobuild"
+          git config --global user.email "noreply@github.com"
+          # --- Build everything
+          npm ci
+          npm run build
+          # --- Move content of dist to root and remove empty dist folder
+          find . -mindepth 1 -maxdepth 1 ! -name dist ! -name .git -exec rm -rf {} \;
+          mv dist/* .
+          rmdir dist
+          # --- Create empty build branch and push this build to it!
+          git checkout -b $TARGET_BRANCH
+          git add -A
+          git commit -m "Update dist branch with latest build"
+          git push --force origin $TARGET_BRANCH
+          echo "Successfully updated the $TARGET_BRANCH branch"
