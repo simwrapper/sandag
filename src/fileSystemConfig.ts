@@ -90,6 +90,13 @@ let fileSystems: FileSystemConfig[] = [
     hidden: true,
   },
   {
+    name: 'TU-Berlin Public Data',
+    slug: 'vsp-public',
+    description: 'Data from VSP /public/data folder',
+    baseURL: 'https://svn.vsp.tu-berlin.de/repos/public-svn/matsim/scenarios/countries',
+    hidden: true,
+  },
+  {
     name: 'Public Data Folder',
     slug: 'files',
     description: 'Data from /public/data folder',
@@ -107,6 +114,8 @@ let fileSystems: FileSystemConfig[] = [
 
   // ----------- End. Below here, these are editable: -------------------
 
+  // ----------- SANDAG ------------
+
   {
     name: 'SANDAG Dev/bronze',
     slug: 'dev-bronze',
@@ -122,6 +131,9 @@ let fileSystems: FileSystemConfig[] = [
     baseURL: 'https://svn.vsp.tu-berlin.de/repos/public-svn/shared/simwrapper',
     example: true,
   },
+
+  // ----------- Dont' change below here either  -------------------
+
   {
     name: 'Localhost:8000',
     slug: 'local',
