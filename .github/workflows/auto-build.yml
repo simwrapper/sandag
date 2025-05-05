@@ -26,9 +26,9 @@ jobs:
 
       - name: Build everything
         env:
+          TARGET_BRANCH: build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          TARGET_BRANCH="build"
           # --- Set git parameters and use write token
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           git config --global user.name "Autobuild"
