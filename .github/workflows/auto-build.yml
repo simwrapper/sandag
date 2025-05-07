@@ -36,10 +36,9 @@ jobs:
           # --- Build everything
           npm ci
           npm run build
-          # --- Move content of dist to root and remove empty dist folder
-          find . -mindepth 1 -maxdepth 1 ! -name dist ! -name .git -exec rm -rf {} \;
-          mv dist/* .
-          rmdir dist
+          # --- Move content of dist to flask-app static
+          rm -rf flask-app/static
+          mv dist flask-app/static
           # --- Create empty build branch and push this build to it!
           git checkout -b $TARGET_BRANCH
           git add -A
