@@ -8,9 +8,14 @@ User=root
 Restart=on-failure
 RestartSec=5s
 ExecStart=/usr/bin/rclone mount dev-bronze: /mnt/dev-bronze \
-	... --vfs-blahblah \
-	...
+	--read-only \
+	--no-modtime \
+	--vfs-cache-mode full \
+	--vfs-fast-fingerprint \
+	--vfs-cache-max-age 7d \
+	--vfs-cache-max-size 10G \
+	--vfs-read-chunk-size 1M \
+	--vfs-read-chunk-streams 16
 
 [Install]
 WantedBy=multi-user.target
-
