@@ -117,10 +117,10 @@ let fileSystems: FileSystemConfig[] = [
   // ----------- SANDAG ------------
 
   {
-    name: 'SANDAG Dev/bronze',
+    name: 'SANDAG Prod/bronze',
     slug: 'dev-bronze',
-    description: 'SANDAG Dev data lake: dev/bronze',
-    baseURL: 'http://localhost:4999',
+    description: 'SANDAG Prod data lake',
+    baseURL: 'http://10.1.1.5',
     omx: true,
   },
   {
