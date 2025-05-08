@@ -13,7 +13,7 @@
 
 STORAGE = {
     "test-desktop": "/Users/billy/Desktop/data",
-    "dev-bronze": r"C:\DevBlobStorage"
+    "dev-bronze": "/home/azuresdg/rclonebronzeprod"
 }
 
 import os,sys
